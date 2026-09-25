@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="HomeScreen.uss" />
+
+    <ui:VisualElement class="screen">
+        <ui:Label class="title" text="AR Science" />
+        <ui:Label class="subtitle" text="Cell visualization" />
+
+        <ui:Button name="plant-cells" class="pill plant" text="Plant cells" />
+        <ui:Button name="animal-cells" class="pill animal" text="Animal cells" />
+        <ui:Button name="compare-cells" class="pill" text="Compare cells" />
+        <ui:Button name="settings" class="pill" text="Settings" />
+    </ui:VisualElement>
+</ui:UXML>

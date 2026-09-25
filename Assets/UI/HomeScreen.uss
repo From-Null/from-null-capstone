@@ -1,0 +1,68 @@
+/* Sizes are in reference pixels (1080x1920 portrait, see AppPanelSettings). */
+
+:root {
+    --bg: #e8f2ec;
+    --ink: #1e3a34;
+    --muted: #5b7069;
+    --plant: #3c9a52;
+    --plant-edge: #2b7340;
+    --animal: #e07b2e;
+    --animal-edge: #b35d1c;
+    --edge: #c3d3cb;
+}
+
+.screen {
+    flex-grow: 1;
+    justify-content: center;
+    padding: 160px 120px;
+    background-color: var(--bg);
+}
+
+.title, .subtitle {
+    -unity-text-align: middle-center;
+}
+
+.title {
+    font-size: 104px;
+    -unity-font-style: bold;
+    color: var(--ink);
+}
+
+.subtitle {
+    font-size: 48px;
+    color: var(--muted);
+    margin-bottom: 120px;
+}
+
+/* The thick bottom border is the button's "depth"; pressing pushes it down. */
+.pill {
+    flex-shrink: 0;
+    height: 176px;
+    margin: 0 0 48px 0;
+    border-width: 0;
+    border-bottom-width: 12px;
+    border-color: var(--edge);
+    border-radius: 88px;
+    background-color: white;
+    color: var(--ink);
+    font-size: 52px;
+    -unity-font-style: bold;
+    transition-duration: 0.08s;
+}
+
+.pill:active {
+    translate: 0 8px;
+    border-bottom-width: 4px;
+}
+
+.plant {
+    background-color: var(--plant);
+    border-color: var(--plant-edge);
+    color: white;
+}
+
+.animal {
+    background-color: var(--animal);
+    border-color: var(--animal-edge);
+    color: white;
+}
