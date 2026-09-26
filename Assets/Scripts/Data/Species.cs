@@ -7,6 +7,7 @@ public class Species : ScriptableObject
     public string speciesName;
     [TextArea] public string description;
     public string infoUri;
+    public Kingdom kingdom;
 
     public string displayName => genusName + " " + speciesName;
 }

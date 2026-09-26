@@ -41,7 +41,7 @@ public class App : MonoBehaviour
 
         root.Q<Label>("species").text = cell.species.displayName;
         root.Q<Label>("cell-name").text = cell.displayName;
-        root.Q<Label>("kingdom").text = "Kingdom " + cell.type.kingdom;
+        root.Q<Label>("kingdom").text = "Kingdom " + cell.species.kingdom.displayName;
 
         root.Q<Label>("info-title").text = cell.type.displayName + " cell";
         root.Q<Label>("info-text").text = cell.type.description;

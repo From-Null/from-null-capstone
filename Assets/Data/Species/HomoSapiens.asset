@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Species
   genusName: Homo
   speciesName: sapiens
-  description: Humans.
+  description: Human beings.
   infoUri: https://en.wikipedia.org/wiki/Human
+  kingdom: {fileID: 11400000, guid: ee0b19f76b1b88668b8b3132f1b39942, type: 2}
