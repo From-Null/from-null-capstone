@@ -8,9 +8,9 @@ public class App : MonoBehaviour
     [SerializeField] VisualTreeAsset homeScreen;
     [SerializeField] VisualTreeAsset cellViewer;
 
-    // Which cells the plant and animal cell buttons go to
-    [SerializeField] Cell plantCell;
-    [SerializeField] Cell animalCell;
+    // Which types of cell the plant and animal cell buttons go to
+    [SerializeField] CellType plantCellType;
+    [SerializeField] CellType animalCellType;
 
     VisualElement root;
 
@@ -31,20 +31,22 @@ public class App : MonoBehaviour
     {
         Show(homeScreen);
 
-        root.Q<Button>("plant-cells").clicked += () => ShowCell(plantCell);
-        root.Q<Button>("animal-cells").clicked += () => ShowCell(animalCell);
+        root.Q<Button>("plant-cells").clicked += () => ShowCell(new Cell(plantCellType));
+        root.Q<Button>("animal-cells").clicked += () => ShowCell(new Cell(animalCellType));
     }
 
     void ShowCell(Cell cell)
     {
         Show(cellViewer);
 
-        root.Q<Label>("species").text = cell.species.displayName;
-        root.Q<Label>("cell-name").text = cell.displayName;
-        root.Q<Label>("kingdom").text = "Kingdom " + cell.species.kingdom.displayName;
+        var kingdom = cell.type.species.kingdom;
 
-        root.Q<Label>("info-title").text = cell.type.displayName + " cell";
-        root.Q<Label>("info-text").text = cell.type.description;
+        root.Q<Label>("species").text = cell.type.species.displayName;
+        root.Q<Label>("cell-name").text = cell.type.displayName;
+        root.Q<Label>("kingdom").text = "Kingdom " + kingdom.displayName;
+
+        root.Q<Label>("info-title").text = kingdom.commonName;
+        root.Q<Label>("info-text").text = kingdom.description;
 
         root.Q<Button>("back").clicked += ShowHome;
     }

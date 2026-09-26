@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e5fffce24eca6064b9334fb4a714248, type: 3}
-  m_Name: Animal
+  m_Name: HumanCheekCellType
   m_EditorClassIdentifier: Assembly-CSharp::CellType
-  displayName: Animal
-  description: 
-  kingdom: Animalia (Animals)
+  displayName: Human cheek cell
+  description: A cheek cell from a human.
   hasNucleus: 1
-  isMulticellular: 1
+  species: {fileID: 11400000, guid: 01938f594dc61c81188c3ec4e6ea5311, type: 2}

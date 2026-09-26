@@ -1,10 +1,13 @@
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "AR Science/Cell")]
-public class Cell : ScriptableObject
+// Cell holds temporary state data, such as a selected organelle
+// or a response to an environmental stimulus.
+// It's not saved.
+public class Cell
 {
-    // e.g., "Leaf cell" or "Cheek cell"
-    public string displayName;
+    // The type of cell, e.g., a human cheek cell
     public CellType type;
-    public Species species;
+
+    public Cell(CellType type)
+    {
+        this.type = type;
+    }
 }
