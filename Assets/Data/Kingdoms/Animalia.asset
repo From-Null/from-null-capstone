@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Kingdom
   scientificName: Animalia
   commonName: Animals
-  description: 'Animals are multicellular organism with a cell nucleus. They get energy by consuming organic material and breathing oxygen. '
+  description: 'Animals are multicellular organisms with a cell nucleus. They get energy by consuming organic material and breathing oxygen. '
   infoUri: https://en.wikipedia.org/wiki/Animal
