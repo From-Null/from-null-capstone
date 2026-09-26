@@ -1,0 +1,65 @@
+.viewer {
+    justify-content: flex-start;
+    padding: 120px 80px;
+}
+
+.species {
+    font-size: 88px;
+    -unity-font-style: bold-and-italic;
+    white-space: normal;
+}
+
+.cell-name {
+    margin-top: 8px;
+    font-size: 52px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    color: var(--ink);
+}
+
+.kingdom {
+    margin: 16px 0 0 0;
+    font-size: 40px;
+    white-space: normal;
+}
+
+.cell-view {
+    flex-grow: 1;
+    margin: 40px 0;
+}
+
+.info {
+    flex-shrink: 0;
+    margin-bottom: 48px;
+    padding: 32px 48px;
+    border-radius: 40px;
+    border-bottom-width: 12px;
+    border-color: var(--edge);
+    background-color: white;
+}
+
+.info-title {
+    font-size: 52px;
+    -unity-font-style: bold;
+    color: var(--ink);
+}
+
+.info-text {
+    font-size: 40px;
+    color: var(--muted);
+    white-space: normal;
+}
+
+.toolbar {
+    flex-direction: row;
+    flex-shrink: 0;
+    margin: 0 -12px;
+}
+
+.tool {
+    flex-grow: 1;
+    flex-basis: 0;
+    height: 144px;
+    margin: 0 12px;
+    font-size: 44px;
+}

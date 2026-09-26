@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements">
-    <ui:Style src="HomeScreen.uss" />
+    <ui:Style src="Theme.uss" />
 
     <ui:VisualElement class="screen">
         <ui:Label class="title" text="AR Science" />

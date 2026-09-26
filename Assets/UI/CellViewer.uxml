@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="Theme.uss" />
+    <ui:Style src="CellViewer.uss" />
+
+    <ui:VisualElement class="screen viewer">
+        <ui:Label name="species" class="title species" text="Genus species" />
+        <ui:Label name="cell-name" class="cell-name" text="Cell" />
+        <ui:Label name="kingdom" class="subtitle kingdom" text="Kingdom" />
+        <ui:VisualElement name="cell-view" class="cell-view" />
+
+        <ui:VisualElement class="info">
+            <ui:Label name="info-title" class="info-title" text="Title" />
+            <ui:Label name="info-text" class="info-text" text="Description" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="toolbar">
+            <ui:Button name="zoom-out" class="pill tool" text="-" />
+            <ui:Button name="zoom-in" class="pill tool" text="+" />
+            <ui:Button name="reset" class="pill tool" text="Reset" />
+            <ui:Button name="back" class="pill tool" text="Back" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
