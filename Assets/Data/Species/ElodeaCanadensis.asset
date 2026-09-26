@@ -16,4 +16,5 @@ MonoBehaviour:
   speciesName: canadensis
   description: Canadian waterweed, an aquatic herb.
   infoUri: https://linnet.geog.ubc.ca/Atlas/Atlas.aspx?sciname=Elodea+canadensis
+  isMulticellular: 1
   kingdom: {fileID: 11400000, guid: 2b363659c9eead8d18c4bd67d59bf27c, type: 2}

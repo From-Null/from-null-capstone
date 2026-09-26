@@ -7,5 +7,4 @@ public class CellType : ScriptableObject
     public string displayName;
     [TextArea] public string description;
     public bool hasNucleus;
-    public bool isMulticellular;
 }
