@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AR Science/Species")]
 public class Species : ScriptableObject
 {
+    public string commonName;
     public string genusName;
     public string speciesName;
     [TextArea] public string description;

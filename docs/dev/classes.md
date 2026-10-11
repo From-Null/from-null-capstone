@@ -25,6 +25,7 @@ classDiagram
     }
     class Species {
         <<ScriptableObject>>
+        +string commonName
         +string genusName
         +string speciesName
         +string description

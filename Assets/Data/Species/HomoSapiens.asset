@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a97679a7e4941aebb476701c5ea53a, type: 3}
   m_Name: HomoSapiens
   m_EditorClassIdentifier: Assembly-CSharp::Species
+  commonName: Human
   genusName: Homo
   speciesName: sapiens
   description: Human beings.
