@@ -22,6 +22,6 @@ public class Species : ScriptableObject
     [Tooltip("The kingdom the species belongs to")]
     public Kingdom kingdom;
 
-    // e.g., "Homo sapiens"
+    // e.g., "Homo sapiens (Human)"
     public string displayName => genusName + " " + speciesName + " (" + commonName + ")";
 }
