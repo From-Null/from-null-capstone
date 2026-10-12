@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 // Cell holds temporary state data, such as a selected organelle
 // or a response to an environmental stimulus.
 // It's not saved.

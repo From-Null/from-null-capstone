@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 [CreateAssetMenu(menuName = "AR Science/Cell Type")]
 public class CellType : ScriptableObject
@@ -21,7 +23,7 @@ public class CellType : ScriptableObject
     }
     
     //get all cell types, placeholder
-    public List<Cell> getCells(CellType type){
+    public List<CellType> getCellTypes(CellType type){
         return new List<CellType>();
     }
 }

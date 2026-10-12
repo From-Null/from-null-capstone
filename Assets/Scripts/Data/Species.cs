@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+using System.Collections.Generic;
 
 [CreateAssetMenu(menuName = "AR Science/Species")]
 public class Species : ScriptableObject
@@ -32,7 +34,7 @@ public class Species : ScriptableObject
     }
     
     //get all cells of this type, placeholder
-    public List<Species> getCells(Species species){
+    public List<Species> getSpecies(Species species){
         return new List<Species>();
     }
 }
