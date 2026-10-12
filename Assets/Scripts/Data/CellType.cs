@@ -11,4 +11,17 @@ public class CellType : ScriptableObject
     public bool hasNucleus;
     [Tooltip("The species the cell belongs to")]
     public Species species;
+    public Guid cellTypeId;
+    public bool isMulticellular;
+    public Kingdom kingdom;
+    
+    //get all cells of this type, placeholder
+    public List<Cell> getCells(CellType type){
+        return new List<Cell>();
+    }
+    
+    //get all cell types, placeholder
+    public List<Cell> getCells(CellType type){
+        return new List<CellType>();
+    }
 }

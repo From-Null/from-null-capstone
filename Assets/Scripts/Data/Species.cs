@@ -21,7 +21,18 @@ public class Species : ScriptableObject
     public bool isMulticellular;
     [Tooltip("The kingdom the species belongs to")]
     public Kingdom kingdom;
+    public Guid speciesId;
 
     // e.g., "Homo sapiens (Human)"
     public string displayName => genusName + " " + speciesName + " (" + commonName + ")";
+    
+    //get all cells of this species, placeholder
+    public List<Cell> getCells(Species species){
+        return new List<Cell>();
+    }
+    
+    //get all cells of this type, placeholder
+    public List<Species> getCells(Species species){
+        return new List<Species>();
+    }
 }
