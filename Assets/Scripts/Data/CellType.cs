@@ -14,8 +14,6 @@ public class CellType : ScriptableObject
     [Tooltip("The species the cell belongs to")]
     public Species species;
     public Guid cellTypeId;
-    public bool isMulticellular;
-    public Kingdom kingdom;
     
     //get all cells of this type, placeholder
     public List<Cell> getCells(CellType type){
