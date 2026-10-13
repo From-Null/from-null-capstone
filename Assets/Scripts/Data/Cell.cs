@@ -10,7 +10,7 @@ public class Cell
     public Guid cellId;
     public Guid modelId;
     public string name;
-    //public Organelle[] organelles;
+    public Organelle[] organelles;
     public Species species;
 
     public Cell(CellType type)
