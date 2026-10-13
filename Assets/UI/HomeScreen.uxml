@@ -1,13 +1,11 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements">
-    <ui:Style src="Theme.uss" />
-
-    <ui:VisualElement class="screen">
-        <ui:Label class="title" text="AR Science" />
-        <ui:Label class="subtitle" text="Cell visualization" />
-
-        <ui:Button name="plant-cells" class="pill plant" text="Plant cells" />
-        <ui:Button name="animal-cells" class="pill animal" text="Animal cells" />
-        <ui:Button name="compare-cells" class="pill" text="Compare cells" />
-        <ui:Button name="settings" class="pill" text="Settings" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Theme.uss?fileID=7433441132597879392&amp;guid=522503a313f72051cb0c9fbcaf4ba79f&amp;type=3#Theme"/>
+    <ui:VisualElement class="screen" style="width: auto; height: auto; min-width: auto; min-height: auto; aspect-ratio: auto;">
+        <ui:Label text="AR Science" class="title"/>
+        <ui:Label text="Cell visualization" class="subtitle"/>
+        <ui:Button name="plant-cells" text="Plant cells" class="pill plant"/>
+        <ui:Button name="animal-cells" text="Animal cells" class="pill animal"/>
+        <ui:Button name="compare-cells" text="Compare cells" class="pill"/>
+        <ui:Button name="settings" text="Settings" class="pill"/>
     </ui:VisualElement>
 </ui:UXML>

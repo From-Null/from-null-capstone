@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Theme.uss?fileID=7433441132597879392&amp;guid=522503a313f72051cb0c9fbcaf4ba79f&amp;type=3#Theme"/>
+    <ui:VisualElement class="pill screen" style="flex-grow: 1; background-color: rgb(232, 242, 236); background-position-y: center; -unity-text-align: upper-left; justify-content: center; align-items: stretch; align-self: auto; flex-direction: column;">
+        <ui:Label text="Settings" name="settings" style="font-size: 104px; color: rgb(30, 58, 52); -unity-font-style: bold; -unity-text-align: upper-center; margin-bottom: 100px;"/>
+        <ui:Button text="Mute" name="mute" class="pill" style="-unity-font-style: bold;"/>
+        <ui:Button text="Recalibrate" name="recalibrate" class="pill"/>
+        <ui:Button text="Replay Tutorial" name="replayTutorial" class="pill"/>
+        <ui:VisualElement style="flex-grow: initial; align-items: stretch; justify-content: space-evenly; align-self: auto; align-content: flex-start; flex-direction: row; flex-wrap: nowrap; position: relative; flex-basis: auto; flex-shrink: initial;">
+            <ui:Button text="Apply Changes" name="applyChanges" class="pill" style="width: 430px;"/>
+            <ui:Button text="Back" name="back" class="pill" style="width: 430px;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
