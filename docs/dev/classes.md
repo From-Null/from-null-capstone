@@ -6,6 +6,10 @@
 classDiagram
     class Cell {
         +CellType type
+        +Guid cellId
+        +Guid modelId
+        +string name
+        +Species species
         +Cell(CellType)
     }
     class CellType {
@@ -14,6 +18,7 @@ classDiagram
         +string description
         +bool hasNucleus
         +Species species
+        +Guid cellTypeId
     }
     class Kingdom {
         <<ScriptableObject>>
@@ -22,6 +27,13 @@ classDiagram
         +string description
         +string infoUri
         +string displayName
+    }
+    class Organelle {
+        +string description
+        +Guid modelId
+        +Guid organelleId
+        +string name
+        +Organelle(string)
     }
     class Species {
         <<ScriptableObject>>
@@ -32,9 +44,11 @@ classDiagram
         +string infoUri
         +bool isMulticellular
         +Kingdom kingdom
+        +Guid speciesId
         +string displayName
     }
     Cell --> CellType : type
+    Cell --> Species : species
     CellType --> Species : species
     Species --> Kingdom : kingdom
 ```
