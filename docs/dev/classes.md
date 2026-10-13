@@ -11,6 +11,7 @@ classDiagram
         +string name
         +Species species
         +Cell(CellType)
+        +getCells() List~Cell~
     }
     class CellType {
         <<ScriptableObject>>
@@ -19,6 +20,8 @@ classDiagram
         +bool hasNucleus
         +Species species
         +Guid cellTypeId
+        +getCells(CellType) List~Cell~
+        +getCellTypes(CellType) List~CellType~
     }
     class Kingdom {
         <<ScriptableObject>>
@@ -34,6 +37,7 @@ classDiagram
         +Guid organelleId
         +string name
         +Organelle(string)
+        +getOrganelles() List~Organelle~
     }
     class Species {
         <<ScriptableObject>>
@@ -46,6 +50,8 @@ classDiagram
         +Kingdom kingdom
         +Guid speciesId
         +string displayName
+        +getCells(Species) List~Cell~
+        +getSpecies(Species) List~Species~
     }
     Cell --> CellType : type
     Cell --> Species : species
