@@ -26,6 +26,7 @@
 .cell-view {
     flex-grow: 1;
     margin: 40px 0;
+    -unity-background-scale-mode: scale-to-fit;
 }
 
 .info {

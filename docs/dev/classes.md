@@ -19,6 +19,7 @@ classDiagram
         +string description
         +bool hasNucleus
         +Species species
+        +GameObject model
         +Guid cellTypeId
         +getCells(CellType) List~Cell~
         +getCellTypes(CellType) List~CellType~
