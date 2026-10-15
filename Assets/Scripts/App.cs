@@ -8,6 +8,7 @@ public class App : MonoBehaviour
     [SerializeField] VisualTreeAsset homeScreen;
     [SerializeField] VisualTreeAsset cellViewer;
     [SerializeField] VisualTreeAsset settingsScreen;
+    [SerializeField] VisualTreeAsset tutorialScreen;
 
     // Which types of cell the plant and animal cell buttons go to
     [SerializeField] CellType plantCellType;
@@ -35,6 +36,13 @@ public class App : MonoBehaviour
         root.Q<Button>("plant-cells").clicked += () => ShowCell(new Cell(plantCellType));
         root.Q<Button>("animal-cells").clicked += () => ShowCell(new Cell(animalCellType));
         root.Q<Button>("settings").clicked += () => ShowSettings();
+        root.Q<Button>("tutorial").clicked += ShowTutorial;
+    }
+
+    void ShowTutorial()
+    {
+        Show(tutorialScreen);
+        root.Q<Button>("home").clicked += ShowHome;
     }
 
     void ShowCell(Cell cell)

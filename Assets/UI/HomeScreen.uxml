@@ -6,6 +6,7 @@
         <ui:Button name="plant-cells" text="Plant cells" class="pill plant"/>
         <ui:Button name="animal-cells" text="Animal cells" class="pill animal"/>
         <ui:Button name="compare-cells" text="Compare cells" class="pill"/>
+        <ui:Button name="tutorial" class="pill" text="Tutorial" />
         <ui:Button name="settings" text="Settings" class="pill"/>
     </ui:VisualElement>
 </ui:UXML>

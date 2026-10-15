@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="Theme.uss" />
+    <ui:VisualElement class="screen">
+        <ui:Label class="title" text="Tutorial" />
+        <ui:Label class="subtitle" text="Instructions on how to use AR Science" />
+        <ui:Button name="home" class="pill" text="Home" />
+    </ui:VisualElement>
+</ui:UXML>

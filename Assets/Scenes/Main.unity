@@ -435,6 +435,7 @@ MonoBehaviour:
   homeScreen: {fileID: 9197481963319205126, guid: a80736140647e974f86a1624d17109e6, type: 3}
   cellViewer: {fileID: 9197481963319205126, guid: e57025f3337afe34598a64089ae1e922, type: 3}
   settingsScreen: {fileID: 9197481963319205126, guid: d4a4d39c10ba0414b8782786ce7e6b50, type: 3}
+  tutorialScreen: {fileID: 9197481963319205126, guid: 52fa460f9ead54601a5ce8d5c54cd16a, type: 3}
   plantCellType: {fileID: 11400000, guid: 77b9f72cc6548a98cab312ab0ae97b8a, type: 2}
   animalCellType: {fileID: 11400000, guid: 3ec7f642ce528aa47b3b9d1168dccdf6, type: 2}
 --- !u!1 &1498728794
