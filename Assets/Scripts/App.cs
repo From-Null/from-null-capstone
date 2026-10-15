@@ -7,6 +7,7 @@ public class App : MonoBehaviour
     // [SerializeField] makes a private field show up in the Inspector.
     [SerializeField] VisualTreeAsset homeScreen;
     [SerializeField] VisualTreeAsset cellViewer;
+    [SerializeField] VisualTreeAsset settingsScreen;
     [SerializeField] VisualTreeAsset tutorialScreen;
 
     // Which types of cell the plant and animal cell buttons go to
@@ -34,6 +35,7 @@ public class App : MonoBehaviour
 
         root.Q<Button>("plant-cells").clicked += () => ShowCell(new Cell(plantCellType));
         root.Q<Button>("animal-cells").clicked += () => ShowCell(new Cell(animalCellType));
+        root.Q<Button>("settings").clicked += () => ShowSettings();
         root.Q<Button>("tutorial").clicked += ShowTutorial;
     }
 
@@ -58,4 +60,12 @@ public class App : MonoBehaviour
 
         root.Q<Button>("back").clicked += ShowHome;
     }
+
+    void ShowSettings()
+    {
+        Show(settingsScreen);
+
+        root.Q<Button>("back").clicked += ShowHome;
+    }
+
 }
