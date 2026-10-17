@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UIElements;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 [RequireComponent(typeof(UIDocument))]
 public class App : MonoBehaviour
@@ -21,13 +23,35 @@ public class App : MonoBehaviour
     // Radius of the sphere that models are scaled to fit in
     const float ModelRadius = 0.22f;
 
+    // Zoom
+    const float DefaultZoom = 1f;
+    const float MinZoom = 0.25f;
+    const float MaxZoom = 4f;
+    const float ZoomStep = 0.25f;
+    const float PinchZoomSpeed = 0.003f;
+
     VisualElement root;
     RenderTexture cellTexture;
+    float currentZoom = DefaultZoom;
 
     void OnEnable()
     {
+        EnhancedTouchSupport.Enable();
         root = GetComponent<UIDocument>().rootVisualElement;
         ShowHome();
+    }
+
+    void Update()
+    {
+        if (!cellCamera.enabled || Touch.activeTouches.Count != 2) return;
+
+        var t0 = Touch.activeTouches[0];
+        var t1 = Touch.activeTouches[1];
+
+        float prevDist = Vector2.Distance(t0.screenPosition - t0.delta, t1.screenPosition - t1.delta);
+        float currDist = Vector2.Distance(t0.screenPosition, t1.screenPosition);
+
+        SetZoom(currentZoom + (currDist - prevDist) * PinchZoomSpeed);
     }
 
     void Show(VisualTreeAsset screen)
@@ -67,9 +91,18 @@ public class App : MonoBehaviour
         root.Q<Label>("info-title").text = kingdom.commonName;
         root.Q<Label>("info-text").text = kingdom.description;
 
+        root.Q<Button>("zoom-in").clicked += () => SetZoom(currentZoom + ZoomStep);
+        root.Q<Button>("zoom-out").clicked += () => SetZoom(currentZoom - ZoomStep);
+        root.Q<Button>("reset").clicked += () => SetZoom(DefaultZoom);
         root.Q<Button>("back").clicked += ShowHome;
 
         ShowModel(cell.type.model);
+    }
+
+    void SetZoom(float zoom)
+    {
+        currentZoom = Mathf.Clamp(zoom, MinZoom, MaxZoom);
+        modelRoot.localScale = Vector3.one * currentZoom;
     }
 
     void ShowModel(GameObject model)
