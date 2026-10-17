@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UIElements;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 [RequireComponent(typeof(UIDocument))]
 public class App : MonoBehaviour
@@ -23,6 +25,7 @@ public class App : MonoBehaviour
     const float MinZoom = 0.25f;
     const float MaxZoom = 4f;
     const float ZoomStep = 0.25f;
+    const float PinchZoomSpeed = 0.003f;
 
     VisualElement root;
     RenderTexture cellTexture;
@@ -30,8 +33,22 @@ public class App : MonoBehaviour
 
     void OnEnable()
     {
+        EnhancedTouchSupport.Enable();
         root = GetComponent<UIDocument>().rootVisualElement;
         ShowHome();
+    }
+
+    void Update()
+    {
+        if (!cellCamera.enabled || Touch.activeTouches.Count != 2) return;
+
+        var t0 = Touch.activeTouches[0];
+        var t1 = Touch.activeTouches[1];
+
+        float prevDist = Vector2.Distance(t0.screenPosition - t0.delta, t1.screenPosition - t1.delta);
+        float currDist = Vector2.Distance(t0.screenPosition, t1.screenPosition);
+
+        SetZoom(currentZoom + (currDist - prevDist) * PinchZoomSpeed);
     }
 
     void Show(VisualTreeAsset screen)
