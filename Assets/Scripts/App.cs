@@ -14,7 +14,15 @@ public class App : MonoBehaviour
     [SerializeField] CellType plantCellType;
     [SerializeField] CellType animalCellType;
 
+    // Camera for the cell models
+    [SerializeField] Camera cellCamera;
+    [SerializeField] Transform modelRoot;
+
+    // Radius of the sphere that models are scaled to fit in
+    const float ModelRadius = 0.22f;
+
     VisualElement root;
+    RenderTexture cellTexture;
 
     void OnEnable()
     {
@@ -24,6 +32,7 @@ public class App : MonoBehaviour
 
     void Show(VisualTreeAsset screen)
     {
+        HideModel();
         root.Clear();
         root.styleSheets.Clear();
         screen.CloneTree(root);
@@ -59,6 +68,54 @@ public class App : MonoBehaviour
         root.Q<Label>("info-text").text = kingdom.description;
 
         root.Q<Button>("back").clicked += ShowHome;
+
+        ShowModel(cell.type.model);
+    }
+
+    void ShowModel(GameObject model)
+    {
+        if (model == null) return;
+
+        FitModel(Instantiate(model, modelRoot).transform);
+
+        if (cellTexture == null)
+        {
+            cellTexture = new RenderTexture(1024, 1024, 24);
+        }
+        cellCamera.targetTexture = cellTexture;
+        cellCamera.enabled = true;
+        root.Q("cell-view").style.backgroundImage = Background.FromRenderTexture(cellTexture);
+    }
+
+    // Scale the model to fit in a sphere
+    void FitModel(Transform model)
+    {
+        var renderers = model.GetComponentsInChildren<Renderer>();
+        if (renderers.Length == 0) return;
+
+        var bounds = renderers[0].bounds;
+        foreach (var r in renderers) bounds.Encapsulate(r.bounds);
+
+        // Fit the model's largest extent
+        var e = bounds.extents;
+        var scale = ModelRadius / Mathf.Max(e.x, e.y, e.z);
+        model.localScale *= scale;
+        var center = model.position + (bounds.center - model.position) * scale;
+        model.position += modelRoot.position - center;
+    }
+
+    void HideModel()
+    {
+        cellCamera.enabled = false;
+        foreach (Transform child in modelRoot)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    void OnDestroy()
+    {
+        Destroy(cellTexture);
     }
 
     void ShowSettings()
