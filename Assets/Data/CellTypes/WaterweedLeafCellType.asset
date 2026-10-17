@@ -16,3 +16,4 @@ MonoBehaviour:
   description: A leaf cell of a Canadian waterweed plant.
   hasNucleus: 1
   species: {fileID: 11400000, guid: 7d10144abfe02edb987bc97fb4baff84, type: 2}
+  model: {fileID: -6689036041284674117, guid: 1c6f528041f3f87cdb0ce45b8ac79c3f, type: 3}

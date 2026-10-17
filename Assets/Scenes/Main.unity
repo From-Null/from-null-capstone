@@ -323,7 +323,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 9a5a332c02e8853ee8afc43faa6428f2, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -438,6 +438,8 @@ MonoBehaviour:
   tutorialScreen: {fileID: 9197481963319205126, guid: 52fa460f9ead54601a5ce8d5c54cd16a, type: 3}
   plantCellType: {fileID: 11400000, guid: 77b9f72cc6548a98cab312ab0ae97b8a, type: 2}
   animalCellType: {fileID: 11400000, guid: 3ec7f642ce528aa47b3b9d1168dccdf6, type: 2}
+  cellCamera: {fileID: 1214002911}
+  modelRoot: {fileID: 1243310849}
 --- !u!1 &1498728794
 GameObject:
   m_ObjectHideFlags: 0
