@@ -22,6 +22,9 @@ public class App : MonoBehaviour
 
     // Radius of the sphere that models are scaled to fit in
     const float ModelRadius = 0.22f;
+
+    // Zoom
+    const float DefaultZoom = 1f;
     const float MinZoom = 0.25f;
     const float MaxZoom = 4f;
     const float ZoomStep = 0.25f;
@@ -29,7 +32,7 @@ public class App : MonoBehaviour
 
     VisualElement root;
     RenderTexture cellTexture;
-    float currentZoom = 1f;
+    float currentZoom = DefaultZoom;
 
     void OnEnable()
     {
@@ -90,6 +93,7 @@ public class App : MonoBehaviour
 
         root.Q<Button>("zoom-in").clicked += () => SetZoom(currentZoom + ZoomStep);
         root.Q<Button>("zoom-out").clicked += () => SetZoom(currentZoom - ZoomStep);
+        root.Q<Button>("reset").clicked += () => SetZoom(DefaultZoom);
         root.Q<Button>("back").clicked += ShowHome;
 
         ShowModel(cell.type.model);
