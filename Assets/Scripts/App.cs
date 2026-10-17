@@ -20,9 +20,13 @@ public class App : MonoBehaviour
 
     // Radius of the sphere that models are scaled to fit in
     const float ModelRadius = 0.22f;
+    const float MinZoom = 0.25f;
+    const float MaxZoom = 4f;
+    const float ZoomStep = 0.25f;
 
     VisualElement root;
     RenderTexture cellTexture;
+    float currentZoom = 1f;
 
     void OnEnable()
     {
@@ -67,9 +71,17 @@ public class App : MonoBehaviour
         root.Q<Label>("info-title").text = kingdom.commonName;
         root.Q<Label>("info-text").text = kingdom.description;
 
+        root.Q<Button>("zoom-in").clicked += () => SetZoom(currentZoom + ZoomStep);
+        root.Q<Button>("zoom-out").clicked += () => SetZoom(currentZoom - ZoomStep);
         root.Q<Button>("back").clicked += ShowHome;
 
         ShowModel(cell.type.model);
+    }
+
+    void SetZoom(float zoom)
+    {
+        currentZoom = Mathf.Clamp(zoom, MinZoom, MaxZoom);
+        modelRoot.localScale = Vector3.one * currentZoom;
     }
 
     void ShowModel(GameObject model)
