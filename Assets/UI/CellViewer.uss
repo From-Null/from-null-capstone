@@ -64,3 +64,24 @@
     margin: 0 12px;
     font-size: 44px;
 }
+
+.cell-view {
+    overflow: hidden;
+}
+
+.organelle-label {
+    position: absolute;
+    translate: -50% -50%;
+    font-size: 28px;
+    -unity-font-style: bold;
+    color: var(--ink);
+    background-color: white;
+    padding: 6px 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.labels-active {
+    background-color: var(--ink);
+    color: white;
+}

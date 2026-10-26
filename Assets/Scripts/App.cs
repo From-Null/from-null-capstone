@@ -96,7 +96,16 @@ public class App : MonoBehaviour
         root.Q<Button>("reset").clicked += () => SetZoom(DefaultZoom);
         root.Q<Button>("back").clicked += ShowHome;
 
-        ShowModel(cell.type.model);
+        // connects the labels to the cell model and "Labels" button
+        var model = ShowModel(cell.type.model);
+        if (model != null){
+            var cellLabels = model.AddComponent<CellLabels>();
+            cellLabels.Initialize(
+                cellCamera,
+                root.Q<VisualElement>("cell-view"),
+                root.Q<Button>("toggle-labels")
+            );
+        }
     }
 
     void SetZoom(float zoom)
@@ -105,11 +114,12 @@ public class App : MonoBehaviour
         modelRoot.localScale = Vector3.one * currentZoom;
     }
 
-    void ShowModel(GameObject model)
+    GameObject ShowModel(GameObject model)
     {
-        if (model == null) return;
+        if (model == null) return null;
 
-        FitModel(Instantiate(model, modelRoot).transform);
+        var instance = Instantiate(model, modelRoot);
+        FitModel(instance.transform);
 
         if (cellTexture == null)
         {
@@ -118,6 +128,8 @@ public class App : MonoBehaviour
         cellCamera.targetTexture = cellTexture;
         cellCamera.enabled = true;
         root.Q("cell-view").style.backgroundImage = Background.FromRenderTexture(cellTexture);
+
+        return instance;
     }
 
     // Scale the model to fit in a sphere
