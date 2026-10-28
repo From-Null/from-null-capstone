@@ -1,0 +1,13 @@
+/* Dark mode color theme */
+
+:root {
+    --bg: #121212;
+    --ink: #E0E0E0;
+    --muted: #B0B0B0;
+    --surface: #1E1E1E;
+    --edge: #444444;
+    --plant: #3c9a52;
+    --plant-edge: #2b7340;
+    --animal: #e07b2e;
+    --animal-edge: #b35d1c;
+}

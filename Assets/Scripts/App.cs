@@ -20,6 +20,9 @@ public class App : MonoBehaviour
     [SerializeField] Camera cellCamera;
     [SerializeField] Transform modelRoot;
 
+    //loaded on top of theme.uss when dark mode is activated
+    [SerializeField] StyleSheet darkThemeSheet;
+
     // Radius of the sphere that models are scaled to fit in
     const float ModelRadius = 0.22f;
 
@@ -33,6 +36,7 @@ public class App : MonoBehaviour
     VisualElement root;
     RenderTexture cellTexture;
     float currentZoom = DefaultZoom;
+    bool isDarkMode = false;
 
     void OnEnable()
     {
@@ -60,6 +64,23 @@ public class App : MonoBehaviour
         root.Clear();
         root.styleSheets.Clear();
         screen.CloneTree(root);
+        //re apply dark mode so it stays
+        ApplyTheme();
+    }
+
+    //applies theme
+    void ApplyTheme(){
+        if(isDarkMode)
+            root.styleSheets.Add(darkThemeSheet);
+    }
+
+    //toggles between light and dark mode
+    void ToggleDarkMode(){
+        isDarkMode = !isDarkMode;
+        if(isDarkMode)
+            root.styleSheets.Add(darkThemeSheet);
+        else
+            root.styleSheets.Remove(darkThemeSheet);
     }
 
     void ShowHome()
@@ -155,7 +176,15 @@ public class App : MonoBehaviour
     {
         Show(settingsScreen);
 
-        root.Q<Button>("back").clicked += ShowHome;
-    }
+        //set toggle label to current theme
+        var themeToggle = root.Q<Button>("theme-toggle");
+        themeToggle.text = isDarkMode ? "Light Mode" : "Dark Mode";
 
+        root.Q<Button>("back").clicked += ShowHome;
+        root.Q<Button>("theme-toggle").clicked += () =>{
+            ToggleDarkMode();
+            //update label
+            themeToggle.text = isDarkMode ? "Light Mode" : "Dark Mode";
+        };
+    }
 }
