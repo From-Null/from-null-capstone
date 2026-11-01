@@ -85,3 +85,9 @@
     background-color: var(--ink);
     color: white;
 }
+
+.organelle-line {
+    position: absolute;
+    width: 3px;
+    background-color: var(--ink);
+}
