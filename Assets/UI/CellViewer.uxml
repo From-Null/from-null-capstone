@@ -17,6 +17,7 @@
             <ui:Button name="zoom-out" class="pill tool" text="-" />
             <ui:Button name="zoom-in" class="pill tool" text="+" />
             <ui:Button name="reset" class="pill tool" text="Reset" />
+            <ui:Button name="toggle-labels" class="pill tool" text="Labels" />
             <ui:Button name="back" class="pill tool" text="Home" />
         </ui:VisualElement>
     </ui:VisualElement>
