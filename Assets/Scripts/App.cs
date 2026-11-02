@@ -37,6 +37,10 @@ public class App : MonoBehaviour
     void OnEnable()
     {
         EnhancedTouchSupport.Enable();
+#if UNITY_EDITOR
+        // Enable simulating touch controls with mouse
+        TouchSimulation.Enable();
+ #endif
         root = GetComponent<UIDocument>().rootVisualElement;
         ShowHome();
     }
