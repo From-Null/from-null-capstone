@@ -98,13 +98,13 @@ public class App : MonoBehaviour
 
         // connects the labels to the cell model and "Labels" button
         var model = ShowModel(cell.type.model);
-        if (model != null){
+        if (model != null)
+        {
             var cellLabels = model.AddComponent<CellLabels>();
-            cellLabels.Initialize(
-                cellCamera,
-                root.Q<VisualElement>("cell-view"),
-                root.Q<Button>("toggle-labels")
-            );
+            cellLabels.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Button>("toggle-labels"));
+
+            var cellInspect = model.AddComponent<CellInspect>();
+            cellInspect.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Label>("info-title"), root.Q<Label>("info-text"));
         }
     }
 
