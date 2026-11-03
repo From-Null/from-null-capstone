@@ -4,23 +4,6 @@ using UnityEngine.UIElements;
 
 public class CellLabels : MonoBehaviour
 {
-    // organelle names students will see
-    readonly Dictionary<string, string> partNames = new()
-    {
-        { "cell_wall", "Cell Wall" },
-        { "lipid_bilayer", "Cell Membrane" },
-        { "cytoskeleton", "Cytoskeleton" },
-        { "central_vacuole_", "Central Vacuole" },
-        { "floating_ribosomes", "Ribosomes" },
-        { "chloroplast", "Chloroplast" },
-        { "chloroplast_2", "Chloroplast" },
-        { "rough_smooth_er", "Endoplasmic Reticulum" },
-        { "Nucleolus", "Nucleolus" },
-        { "Mitochondria", "Mitochondria" },
-        { "Nucleus", "Nucleus" },
-        { "golgi", "Golgi Apparatus" }
-    };
-
     readonly List<(Transform part, Vector3 center, Label label, VisualElement line)> labels = new();
 
     Camera cellCamera;
@@ -28,7 +11,7 @@ public class CellLabels : MonoBehaviour
     Button labelsButton;
     bool labelsVisible;
 
-    public void Initialize(Camera camera, VisualElement view, Button button)
+    public void Initialize(Camera camera, VisualElement view, Button button, OrganelleLookup organelles)
     {
         // gets the camera, viewer, and button from App.cs
         cellCamera = camera;
@@ -37,8 +20,9 @@ public class CellLabels : MonoBehaviour
 
         foreach (var part in GetComponentsInChildren<Transform>())
         {
-            if (!partNames.TryGetValue(part.name, out var displayName))
+            if (!organelles.TryGet(part.name, out var organelle))
                 continue;
+            var displayName = organelle.displayName;
 
             // finds the 3D shapes that make up each organelle
             var renderers = part.GetComponentsInChildren<Renderer>();
