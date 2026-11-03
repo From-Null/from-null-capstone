@@ -364,6 +364,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 766973782}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1251801735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1251801736}
+  - component: {fileID: 1251801737}
+  m_Layer: 0
+  m_Name: Scene Navigation Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1251801736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251801735}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.74311, y: 0.4506, z: -0.54048}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1251801737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251801735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a122cd93beb0e684cbeb4607c57569d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneNavigation
 --- !u!1 &1347031057
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,6 +480,7 @@ MonoBehaviour:
   cellViewer: {fileID: 9197481963319205126, guid: e57025f3337afe34598a64089ae1e922, type: 3}
   settingsScreen: {fileID: 9197481963319205126, guid: d4a4d39c10ba0414b8782786ce7e6b50, type: 3}
   tutorialScreen: {fileID: 9197481963319205126, guid: 52fa460f9ead54601a5ce8d5c54cd16a, type: 3}
+  sceneNavigation: {fileID: 1251801737}
   plantCellType: {fileID: 11400000, guid: 77b9f72cc6548a98cab312ab0ae97b8a, type: 2}
   animalCellType: {fileID: 11400000, guid: 3ec7f642ce528aa47b3b9d1168dccdf6, type: 2}
   cellCamera: {fileID: 1214002911}
@@ -575,3 +620,4 @@ SceneRoots:
   - {fileID: 1498728796}
   - {fileID: 1347031059}
   - {fileID: 766973782}
+  - {fileID: 1251801736}
