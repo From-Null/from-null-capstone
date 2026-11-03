@@ -3,10 +3,13 @@
     <ui:Style src="CellViewer.uss" />
 
     <ui:VisualElement class="screen viewer">
+        <ui:VisualElement name="cell-view" class="cell-view" />
+
         <ui:Label name="species" class="title species" text="Genus species" />
         <ui:Label name="cell-name" class="cell-name" text="Cell" />
         <ui:Label name="kingdom" class="subtitle kingdom" text="Kingdom" />
-        <ui:VisualElement name="cell-view" class="cell-view" />
+
+        <ui:VisualElement class="spacer" picking-mode="Ignore" />
 
         <ui:VisualElement class="info">
             <ui:Label name="info-title" class="info-title" text="Title" />
