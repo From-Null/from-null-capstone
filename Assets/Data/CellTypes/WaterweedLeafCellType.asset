@@ -17,3 +17,28 @@ MonoBehaviour:
   hasNucleus: 1
   species: {fileID: 11400000, guid: 7d10144abfe02edb987bc97fb4baff84, type: 2}
   model: {fileID: -6689036041284674117, guid: 1c6f528041f3f87cdb0ce45b8ac79c3f, type: 3}
+  parts:
+  - objectName: cell_wall
+    organelle: {fileID: 11400000, guid: cf3043a19ef74e0c58ca1814116e48f2, type: 2}
+  - objectName: lipid_bilayer
+    organelle: {fileID: 11400000, guid: 5dfc0fbad333974819bdfc4f088696a3, type: 2}
+  - objectName: cytoskeleton
+    organelle: {fileID: 11400000, guid: a3b6e2b193b967c1d97ab57a3257fcd1, type: 2}
+  - objectName: central_vacuole_
+    organelle: {fileID: 11400000, guid: bfad2b621d48f78e38073e66dafc5815, type: 2}
+  - objectName: floating_ribosomes
+    organelle: {fileID: 11400000, guid: 3414f8d82cfab863ca0e97af5a5e25b4, type: 2}
+  - objectName: chloroplast
+    organelle: {fileID: 11400000, guid: d0e0ab6d077f248c7b32c5c037d33c4b, type: 2}
+  - objectName: chloroplast_2
+    organelle: {fileID: 11400000, guid: d0e0ab6d077f248c7b32c5c037d33c4b, type: 2}
+  - objectName: rough_smooth_er
+    organelle: {fileID: 11400000, guid: 4bb1ea06ceadf0980bb786d225b65d38, type: 2}
+  - objectName: Nucleolus
+    organelle: {fileID: 11400000, guid: 777dfb4fc040e6e198e3fa5103ee1c10, type: 2}
+  - objectName: Mitochondria
+    organelle: {fileID: 11400000, guid: 1af822f6bc64110aeac750322f7090b6, type: 2}
+  - objectName: Nucleus
+    organelle: {fileID: 11400000, guid: 8fa7b761201401a598d2a856433eb585, type: 2}
+  - objectName: golgi
+    organelle: {fileID: 11400000, guid: 28e247d1ef6310f088e76ae68f6d86d3, type: 2}
