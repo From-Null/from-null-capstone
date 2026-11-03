@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Nucleoplasm
   m_EditorClassIdentifier: Assembly-CSharp::Organelle
   displayName: Nucleoplasm
-  description: 
+  description: A gel-like substance that fills the nucleus.

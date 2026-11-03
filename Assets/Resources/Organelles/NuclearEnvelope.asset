@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: NuclearEnvelope
   m_EditorClassIdentifier: Assembly-CSharp::Organelle
   displayName: Nuclear Envelope
-  description: 
+  description: A membrane that protects the DNA and separates the nucleus from the rest of the cell.

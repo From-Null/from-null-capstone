@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Cytoplasm
   m_EditorClassIdentifier: Assembly-CSharp::Organelle
   displayName: Cytoplasm
-  description: 
+  description: All of the material inside of the cell except for the nucleus. The main ingredient is a gel called cytosol.

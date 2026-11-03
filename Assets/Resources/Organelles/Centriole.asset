@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Centriole
   m_EditorClassIdentifier: Assembly-CSharp::Organelle
   displayName: Centriole
-  description: 
+  description: Helps form cilia, and helps organize the mitotic spindle when the cell divides.

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Lysosome
   m_EditorClassIdentifier: Assembly-CSharp::Organelle
   displayName: Lysosome
-  description: 
+  description: Breaks down large molecules into pieces that the cell can use. Created by the Golgi apparatus.
