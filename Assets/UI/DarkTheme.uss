@@ -11,3 +11,13 @@
     --animal: #e07b2e;
     --animal-edge: #b35d1c;
 }
+
+/* makes organelle label actually work with dark mode */
+.organelle-label {
+    color: #1e3a34;
+    background-color: white;
+}
+
+.organelle-line {
+    background-color: #1e3a34;
+}
