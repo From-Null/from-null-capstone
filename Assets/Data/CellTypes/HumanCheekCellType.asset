@@ -16,3 +16,11 @@ MonoBehaviour:
   description: A cheek cell from a human.
   hasNucleus: 1
   species: {fileID: 11400000, guid: 01938f594dc61c81188c3ec4e6ea5311, type: 2}
+  model: {fileID: 211280466716591218, guid: b40b7ef1d0495a9ac83cb677da5ddb25, type: 3}
+  parts:
+  - objectName: Ribosomes
+    organelle: {fileID: 11400000, guid: 3414f8d82cfab863ca0e97af5a5e25b4, type: 2}
+  - objectName: Smooth ER
+    organelle: {fileID: 11400000, guid: 4bb1ea06ceadf0980bb786d225b65d38, type: 2}
+  - objectName: Rough ER
+    organelle: {fileID: 11400000, guid: 4bb1ea06ceadf0980bb786d225b65d38, type: 2}
