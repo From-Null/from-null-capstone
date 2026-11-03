@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI/Theme.uss?fileID=7433441132597879392&amp;guid=522503a313f72051cb0c9fbcaf4ba79f&amp;type=3#Theme"/>
     <ui:VisualElement class="screen" style="flex-grow: 1; background-position-y: center; -unity-text-align: upper-left; justify-content: center; align-items: stretch; align-self: auto; flex-direction: column;">
         <ui:Label text="Settings" name="settings" style="font-size: 104px; -unity-font-style: bold; -unity-text-align: upper-center; margin-bottom: 100px;"/>
-        <ui:Button text="Mute" name="mute" class="pill" style="-unity-font-style: bold;"/>
+        <!-- <ui:Button text="Mute" name="mute" class="pill" style="-unity-font-style: bold;"/> -->
         <ui:Button text="Recalibrate" name="recalibrate" class="pill"/>
         <ui:Button text="Replay Tutorial" name="replayTutorial" class="pill"/>
         <ui:Button text="Dark Mode" name="theme-toggle" class="pill"/>
