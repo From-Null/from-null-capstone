@@ -20,6 +20,12 @@ public class App : MonoBehaviour
     [SerializeField] Camera cellCamera;
     [SerializeField] Transform modelRoot;
 
+    //loaded on top of theme.uss when dark mode is activated
+    [SerializeField] StyleSheet darkThemeSheet;
+
+    //if it is required to click the apply button or not
+    const bool RequireApply = true;
+
     // Radius of the sphere that models are scaled to fit in
     const float ModelRadius = 0.22f;
 
@@ -36,6 +42,8 @@ public class App : MonoBehaviour
     VisualElement root;
     RenderTexture cellTexture;
     float currentZoom = DefaultZoom;
+    bool isDarkMode = false;
+    bool pendingDarkMode = false; 
 
     void OnEnable()
     {
@@ -87,6 +95,35 @@ public class App : MonoBehaviour
         root.Clear();
         root.styleSheets.Clear();
         screen.CloneTree(root);
+        //re apply dark mode so it stays
+        ApplyTheme();
+    }
+
+    //applies theme
+    void ApplyTheme(){
+        if(isDarkMode)
+            root.styleSheets.Add(darkThemeSheet);
+    }
+
+    //toggles between light and dark mode
+    void ToggleDarkMode(){
+        isDarkMode = !isDarkMode;
+        if(isDarkMode)
+            root.styleSheets.Add(darkThemeSheet);
+        else
+            root.styleSheets.Remove(darkThemeSheet);
+    }
+
+    //apply the changes in settings menu
+    void ApplyChanges(){
+        isDarkMode = pendingDarkMode; //theme is already showing from the preview
+    }
+
+    //shows light or dark mode without saving it, leaving settings without applying goes back to isDarkMode
+    void PreviewTheme(bool dark){
+        root.styleSheets.Remove(darkThemeSheet); //remove first so it never gets added twice
+        if(dark)
+            root.styleSheets.Add(darkThemeSheet);
     }
 
     void ShowHome()
@@ -197,8 +234,30 @@ public class App : MonoBehaviour
     void ShowSettings()
     {
         Show(settingsScreen);
+        
+        pendingDarkMode = isDarkMode;
+
+        //set label to theme it will switch to
+        var themeToggle = root.Q<Button>("theme-toggle");
+        themeToggle.text = pendingDarkMode ? "Light Mode" : "Dark Mode";
+
+        //get rid of apply changes if RequireApply=false
+        if(!RequireApply){
+            root.Q<Button>("applyChanges").style.display = DisplayStyle.None;
+        }
 
         root.Q<Button>("back").clicked += ShowHome;
+        root.Q<Button>("applyChanges").clicked += ApplyChanges;
+        root.Q<Button>("replayTutorial").clicked += ShowTutorial; //just goes to tutorial screen for now
+        root.Q<Button>("theme-toggle").clicked += () =>{
+            pendingDarkMode = !pendingDarkMode;
+            PreviewTheme(pendingDarkMode); //preview right away
+            //only applies immedietly if requireApply=false
+            if(!RequireApply){
+                ApplyChanges();
+            }
+            //update label
+            themeToggle.text = pendingDarkMode ? "Light Mode" : "Dark Mode";
+        };
     }
-
 }
