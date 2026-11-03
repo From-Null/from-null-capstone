@@ -128,10 +128,12 @@ public class App : MonoBehaviour
         if (model != null)
         {
             var cellLabels = model.AddComponent<CellLabels>();
-            cellLabels.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Button>("toggle-labels"));
+            var organelles = new OrganelleLookup(cell.type);
+
+            cellLabels.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Button>("toggle-labels"), organelles);
 
             var cellInspect = model.AddComponent<CellInspect>();
-            cellInspect.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Label>("info-title"), root.Q<Label>("info-text"), cell.type.parts);
+            cellInspect.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Label>("info-title"), root.Q<Label>("info-text"), organelles);
         }
     }
 

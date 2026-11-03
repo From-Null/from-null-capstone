@@ -4,33 +4,20 @@ using UnityEngine.UIElements;
 
 public class CellInspect : MonoBehaviour{
 
-    // Model object name -> Organelle
-    readonly Dictionary<string, Organelle> partInfo = new(System.StringComparer.OrdinalIgnoreCase);
+    OrganelleLookup organelles;
 
     Camera cellCamera;
     VisualElement cellView;
     Label infoTitle;
     Label infoText;
 
-    public void Initialize(Camera camera, VisualElement view, Label title, Label text, List<CellType.ModelOrganellePart> parts){
+    public void Initialize(Camera camera, VisualElement view, Label title, Label text, OrganelleLookup lookup){
 
         cellCamera = camera;
         cellView = view;
         infoTitle = title;
         infoText = text;
-
-        // Organelles match by exact name like "Nucleus"
-        foreach (var organelle in Resources.LoadAll<Organelle>("Organelles")){
-            partInfo[organelle.name] = organelle;
-            partInfo[organelle.displayName] = organelle;
-        }
-
-        // Model-specific organelle mappings
-        // For example, "golgi" to "Golgi apparatus"
-        foreach (var part in parts){
-            if (part.organelle != null)
-                partInfo[part.objectName] = part.organelle;
-        }
+        organelles = lookup;
 
         // makes each organelle selectable
         foreach (var mesh in GetComponentsInChildren<MeshFilter>()){
@@ -40,7 +27,7 @@ public class CellInspect : MonoBehaviour{
 
             while (part != null && part != transform){
 
-                if (LookupOrganelle(part.name, out _)){
+                if (organelles.TryGet(part.name, out _)){
                     found = true;
                     break;
                 }
@@ -93,7 +80,7 @@ public class CellInspect : MonoBehaviour{
             var part = hit.transform;
             while (part != null && part != transform){
 
-                if (LookupOrganelle(part.name, out var organelle)){
+                if (organelles.TryGet(part.name, out var organelle)){
                     infoTitle.text = organelle.displayName;
                     infoText.text = organelle.description;
                     return;
@@ -101,12 +88,6 @@ public class CellInspect : MonoBehaviour{
                 part = part.parent;
             }
         }
-    }
-
-    // Match object names ignoring case and dropping suffixes
-    // like ".002". For example, "lysosome.002" matches "Lysosome".
-    bool LookupOrganelle(string objectName, out Organelle organelle){
-        return partInfo.TryGetValue(objectName.Split('.')[0], out organelle);
     }
 
     void OnDestroy(){
