@@ -30,6 +30,9 @@ public class App : MonoBehaviour
     const float ZoomStep = 0.25f;
     const float PinchZoomSpeed = 0.003f;
 
+    // Degrees rotated per pixel moved in the gesture
+    const float DragRotationSpeed = 0.25f;
+
     VisualElement root;
     RenderTexture cellTexture;
     float currentZoom = DefaultZoom;
@@ -37,21 +40,45 @@ public class App : MonoBehaviour
     void OnEnable()
     {
         EnhancedTouchSupport.Enable();
+#if UNITY_EDITOR
+        // Enable simulating touch controls with mouse
+        TouchSimulation.Enable();
+ #endif
         root = GetComponent<UIDocument>().rootVisualElement;
         ShowHome();
     }
 
     void Update()
     {
-        if (!cellCamera.enabled || Touch.activeTouches.Count != 2) return;
+        if (!cellCamera.enabled) return;
 
-        var t0 = Touch.activeTouches[0];
-        var t1 = Touch.activeTouches[1];
+        var touches = Touch.activeTouches;
+        if (touches.Count == 1) DragRotateGesture(touches[0].delta);
+        else if (touches.Count == 2) PinchZoomGesture(touches[0], touches[1]);
+    }
 
-        float prevDist = Vector2.Distance(t0.screenPosition - t0.delta, t1.screenPosition - t1.delta);
-        float currDist = Vector2.Distance(t0.screenPosition, t1.screenPosition);
+    // Moving one finger to rotate the model
+    void DragRotateGesture(Vector2 delta)
+    {
+        var xform = cellCamera.transform;
+        modelRoot.Rotate(xform.up, -1 * delta.x * DragRotationSpeed, Space.World);
+        modelRoot.Rotate(xform.right, delta.y * DragRotationSpeed, Space.World);
+    }
 
-        SetZoom(currentZoom + (currDist - prevDist) * PinchZoomSpeed);
+    // Two fingers pinched or spread to zoom in or out
+    void PinchZoomGesture(Touch t0, Touch t1)
+    {
+        var prev = (t1.screenPosition - t1.delta) - (t0.screenPosition - t0.delta);
+        var curr = t1.screenPosition - t0.screenPosition;
+
+        SetZoom(currentZoom + (curr.magnitude - prev.magnitude) * PinchZoomSpeed);
+    }
+
+    // Reset to default zoom and positioning
+    void ResetView()
+    {
+        SetZoom(DefaultZoom);
+        modelRoot.localRotation = Quaternion.identity;
     }
 
     void Show(VisualTreeAsset screen)
@@ -93,7 +120,7 @@ public class App : MonoBehaviour
 
         root.Q<Button>("zoom-in").clicked += () => SetZoom(currentZoom + ZoomStep);
         root.Q<Button>("zoom-out").clicked += () => SetZoom(currentZoom - ZoomStep);
-        root.Q<Button>("reset").clicked += () => SetZoom(DefaultZoom);
+        root.Q<Button>("reset").clicked += ResetView;
         root.Q<Button>("back").clicked += ShowHome;
 
         // connects the labels to the cell model and "Labels" button
@@ -128,6 +155,8 @@ public class App : MonoBehaviour
         cellCamera.targetTexture = cellTexture;
         cellCamera.enabled = true;
         root.Q("cell-view").style.backgroundImage = Background.FromRenderTexture(cellTexture);
+
+        ResetView();
 
         return instance;
     }

@@ -1,2 +1,19 @@
 fileFormatVersion: 2
 guid: 5e79ec8c0d96d322a9b6b497b1d21cab
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - homeScreen: {instanceID: 0}
+  - cellViewer: {instanceID: 0}
+  - settingsScreen: {instanceID: 0}
+  - tutorialScreen: {instanceID: 0}
+  - plantCellType: {instanceID: 0}
+  - animalCellType: {instanceID: 0}
+  - cellCamera: {instanceID: 0}
+  - modelRoot: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
