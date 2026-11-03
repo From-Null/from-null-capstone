@@ -17,6 +17,17 @@ public class CellType : ScriptableObject
 
     [Tooltip("The cell's 3D model")]
     public GameObject model;
+
+    [Serializable]
+    public struct ModelOrganellePart
+    {
+        [Tooltip("Name of the object in the cell's 3D model")]
+        public string objectName;
+        public Organelle organelle;
+    }
+
+    [Tooltip("Mapping of model objects to organelles")]
+    public List<ModelOrganellePart> parts;
     
     //get all cells of this type, placeholder
     public List<Cell> getCells(CellType type){

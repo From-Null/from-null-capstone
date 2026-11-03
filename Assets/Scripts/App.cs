@@ -131,7 +131,7 @@ public class App : MonoBehaviour
             cellLabels.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Button>("toggle-labels"));
 
             var cellInspect = model.AddComponent<CellInspect>();
-            cellInspect.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Label>("info-title"), root.Q<Label>("info-text"));
+            cellInspect.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Label>("info-title"), root.Q<Label>("info-text"), cell.type.parts);
         }
     }
 
