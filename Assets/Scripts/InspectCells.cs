@@ -4,36 +4,20 @@ using UnityEngine.UIElements;
 
 public class CellInspect : MonoBehaviour{
 
-    // organelle descriptions from references document
-    readonly Dictionary<string, (string name, string description)> partInfo = new(){
-
-        { "cell_wall", ("Cell Wall", "Strong outer layer that protects and supports the cell.") },
-        { "lipid_bilayer", ("Cell Membrane", "Thin boundary that separates the cell from its surroundings. It also controls what enters and leaves the cell.") },
-        { "cytoskeleton", ("Cytoskeleton", "Network of fibers and tubes that help shape and support the cell.") },
-        { "central_vacuole_", ("Vacuole", "Stores water and other materials.") },
-        { "floating_ribosomes", ("Ribosomes", "Make proteins which cells need to grow.") },
-        { "chloroplast", ("Chloroplast", "Uses sunlight to help make food for the plant through photosynthesis.") },
-        { "chloroplast_2", ("Chloroplast", "Uses sunlight to help make food for the plant through photosynthesis.") },
-        { "rough_smooth_er", ("Endoplasmic Reticulum",
-            "Rough Endoplasmic Reticulum (ER): Network of membranes that helps make and move proteins.\n" +
-            "Smooth Endoplasmic Reticulum (ER): Network of membranes that helps make the fats that the cell needs.") },
-        { "Nucleolus", ("Nucleolus", "A small area inside the nucleus that helps make ribosomes.") },
-        { "Mitochondria", ("Mitochondria", "Turn energy from food into a form the cell can use. They are referred to as the powerhouses of the cell.") },
-        { "Nucleus", ("Nucleus", "Holds DNA, which contains the instructions that help the cell grow and function. It is referred to as the cell’s control center.") },
-        { "golgi", ("Golgi Apparatus", "Sorts and packages proteins from the Endoplasmic Reticulum to send them where they need to go.") }
-    };
+    OrganelleLookup organelles;
 
     Camera cellCamera;
     VisualElement cellView;
     Label infoTitle;
     Label infoText;
 
-    public void Initialize(Camera camera, VisualElement view, Label title, Label text){
+    public void Initialize(Camera camera, VisualElement view, Label title, Label text, OrganelleLookup lookup){
 
         cellCamera = camera;
         cellView = view;
         infoTitle = title;
         infoText = text;
+        organelles = lookup;
 
         // makes each organelle selectable
         foreach (var mesh in GetComponentsInChildren<MeshFilter>()){
@@ -43,7 +27,7 @@ public class CellInspect : MonoBehaviour{
 
             while (part != null && part != transform){
 
-                if (partInfo.ContainsKey(part.name)){
+                if (organelles.TryGet(part.name, out _)){
                     found = true;
                     break;
                 }
@@ -96,9 +80,9 @@ public class CellInspect : MonoBehaviour{
             var part = hit.transform;
             while (part != null && part != transform){
 
-                if (partInfo.TryGetValue(part.name, out var info)){
-                    infoTitle.text = info.name;
-                    infoText.text = info.description;
+                if (organelles.TryGet(part.name, out var organelle)){
+                    infoTitle.text = organelle.displayName;
+                    infoText.text = organelle.description;
                     return;
                 }
                 part = part.parent;

@@ -24,9 +24,16 @@
 }
 
 .cell-view {
-    flex-grow: 1;
-    margin: 40px 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     -unity-background-scale-mode: scale-to-fit;
+}
+
+.spacer {
+    flex-grow: 1;
 }
 
 .info {
@@ -36,7 +43,7 @@
     border-radius: 40px;
     border-bottom-width: 12px;
     border-color: var(--edge);
-    background-color: white;
+    background-color: var(--surface); /* changes based on theme */
 }
 
 .info-title {

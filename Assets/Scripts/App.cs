@@ -21,6 +21,12 @@ public class App : MonoBehaviour
     [SerializeField] Camera cellCamera;
     [SerializeField] Transform modelRoot;
 
+    //loaded on top of theme.uss when dark mode is activated
+    [SerializeField] StyleSheet darkThemeSheet;
+
+    //if it is required to click the apply button or not
+    const bool RequireApply = true;
+
     // Radius of the sphere that models are scaled to fit in
     const float ModelRadius = 0.22f;
 
@@ -31,28 +37,57 @@ public class App : MonoBehaviour
     const float ZoomStep = 0.25f;
     const float PinchZoomSpeed = 0.003f;
 
+    // Degrees rotated per pixel moved in the gesture
+    const float DragRotationSpeed = 0.25f;
+
     VisualElement root;
     RenderTexture cellTexture;
     float currentZoom = DefaultZoom;
+    bool isDarkMode = false;
+    bool pendingDarkMode = false; 
 
     void OnEnable()
     {
         EnhancedTouchSupport.Enable();
+#if UNITY_EDITOR
+        // Enable simulating touch controls with mouse
+        TouchSimulation.Enable();
+ #endif
         root = GetComponent<UIDocument>().rootVisualElement;
         ShowHome();
     }
 
     void Update()
     {
-        if (!cellCamera.enabled || Touch.activeTouches.Count != 2) return;
+        if (!cellCamera.enabled) return;
 
-        var t0 = Touch.activeTouches[0];
-        var t1 = Touch.activeTouches[1];
+        var touches = Touch.activeTouches;
+        if (touches.Count == 1) DragRotateGesture(touches[0].delta);
+        else if (touches.Count == 2) PinchZoomGesture(touches[0], touches[1]);
+    }
 
-        float prevDist = Vector2.Distance(t0.screenPosition - t0.delta, t1.screenPosition - t1.delta);
-        float currDist = Vector2.Distance(t0.screenPosition, t1.screenPosition);
+    // Moving one finger to rotate the model
+    void DragRotateGesture(Vector2 delta)
+    {
+        var xform = cellCamera.transform;
+        modelRoot.Rotate(xform.up, -1 * delta.x * DragRotationSpeed, Space.World);
+        modelRoot.Rotate(xform.right, delta.y * DragRotationSpeed, Space.World);
+    }
 
-        SetZoom(currentZoom + (currDist - prevDist) * PinchZoomSpeed);
+    // Two fingers pinched or spread to zoom in or out
+    void PinchZoomGesture(Touch t0, Touch t1)
+    {
+        var prev = (t1.screenPosition - t1.delta) - (t0.screenPosition - t0.delta);
+        var curr = t1.screenPosition - t0.screenPosition;
+
+        SetZoom(currentZoom + (curr.magnitude - prev.magnitude) * PinchZoomSpeed);
+    }
+
+    // Reset to default zoom and positioning
+    void ResetView()
+    {
+        SetZoom(DefaultZoom);
+        modelRoot.localRotation = Quaternion.identity;
     }
 
     void Show(VisualTreeAsset screen)
@@ -61,6 +96,35 @@ public class App : MonoBehaviour
         root.Clear();
         root.styleSheets.Clear();
         screen.CloneTree(root);
+        //re apply dark mode so it stays
+        ApplyTheme();
+    }
+
+    //applies theme
+    void ApplyTheme(){
+        if(isDarkMode)
+            root.styleSheets.Add(darkThemeSheet);
+    }
+
+    //toggles between light and dark mode
+    void ToggleDarkMode(){
+        isDarkMode = !isDarkMode;
+        if(isDarkMode)
+            root.styleSheets.Add(darkThemeSheet);
+        else
+            root.styleSheets.Remove(darkThemeSheet);
+    }
+
+    //apply the changes in settings menu
+    void ApplyChanges(){
+        isDarkMode = pendingDarkMode; //theme is already showing from the preview
+    }
+
+    //shows light or dark mode without saving it, leaving settings without applying goes back to isDarkMode
+    void PreviewTheme(bool dark){
+        root.styleSheets.Remove(darkThemeSheet); //remove first so it never gets added twice
+        if(dark)
+            root.styleSheets.Add(darkThemeSheet);
     }
 
     void ShowHome()
@@ -95,7 +159,7 @@ public class App : MonoBehaviour
 
         root.Q<Button>("zoom-in").clicked += () => SetZoom(currentZoom + ZoomStep);
         root.Q<Button>("zoom-out").clicked += () => SetZoom(currentZoom - ZoomStep);
-        root.Q<Button>("reset").clicked += () => SetZoom(DefaultZoom);
+        root.Q<Button>("reset").clicked += ResetView;
         root.Q<Button>("back").clicked += ShowHome;
 
         // connects the labels to the cell model and "Labels" button
@@ -103,10 +167,12 @@ public class App : MonoBehaviour
         if (model != null)
         {
             var cellLabels = model.AddComponent<CellLabels>();
-            cellLabels.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Button>("toggle-labels"));
+            var organelles = new OrganelleLookup(cell.type);
+
+            cellLabels.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Button>("toggle-labels"), organelles);
 
             var cellInspect = model.AddComponent<CellInspect>();
-            cellInspect.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Label>("info-title"), root.Q<Label>("info-text"));
+            cellInspect.Initialize(cellCamera, root.Q<VisualElement>("cell-view"), root.Q<Label>("info-title"), root.Q<Label>("info-text"), organelles);
         }
     }
 
@@ -130,6 +196,8 @@ public class App : MonoBehaviour
         cellCamera.targetTexture = cellTexture;
         cellCamera.enabled = true;
         root.Q("cell-view").style.backgroundImage = Background.FromRenderTexture(cellTexture);
+
+        ResetView();
 
         return instance;
     }
@@ -168,8 +236,30 @@ public class App : MonoBehaviour
     void ShowSettings()
     {
         Show(settingsScreen);
+        
+        pendingDarkMode = isDarkMode;
+
+        //set label to theme it will switch to
+        var themeToggle = root.Q<Button>("theme-toggle");
+        themeToggle.text = pendingDarkMode ? "Light Mode" : "Dark Mode";
+
+        //get rid of apply changes if RequireApply=false
+        if(!RequireApply){
+            root.Q<Button>("applyChanges").style.display = DisplayStyle.None;
+        }
 
         root.Q<Button>("back").clicked += ShowHome;
+        root.Q<Button>("applyChanges").clicked += ApplyChanges;
+        root.Q<Button>("replayTutorial").clicked += ShowTutorial; //just goes to tutorial screen for now
+        root.Q<Button>("theme-toggle").clicked += () =>{
+            pendingDarkMode = !pendingDarkMode;
+            PreviewTheme(pendingDarkMode); //preview right away
+            //only applies immedietly if requireApply=false
+            if(!RequireApply){
+                ApplyChanges();
+            }
+            //update label
+            themeToggle.text = pendingDarkMode ? "Light Mode" : "Dark Mode";
+        };
     }
-
 }
